@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tumofeu/DCKAChat/issues"
   },
-  "homepage": "https://github.com/tumofeu/DCKAChat#readme"
+  "homepage": "https://github.com/tumofeu/DCKAChat#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
