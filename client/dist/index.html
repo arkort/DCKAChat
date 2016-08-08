@@ -60,17 +60,24 @@
 </body>
 
 <script>
-        var socket = io();
+    function receiveMessage(msg)
+    {
+        $('#messages').append($('<li>').text(msg));
+    }
 
-        $('form').submit(function () {
-            socket.emit('chat message', $('#m').val());
-            $('#m').val('');
-            return false;
-        });
+    var socket = io();
 
-        socket.on('chat message', function (msg) {
-            $('#messages').append($('<li>').text(msg));
-        });
+    $('form').submit(function () {
+        var msg = $('#m').val();
+        socket.emit('chat message', msg);
+        receiveMessage(msg);
+        $('#m').val('');
+        return false;
+    });
+
+    socket.on('chat message', function (msg) {
+        receiveMessage(msg);
+    });
 </script>
 
 </html>
