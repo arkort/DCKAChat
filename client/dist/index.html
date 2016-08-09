@@ -1,6 +1,6 @@
 ﻿<html>
 <head>
-    <title>Socket.IO chat</title>
+    <title>DCKA chat</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
@@ -62,7 +62,7 @@
 <script>
     function receiveMessage(msg)
     {
-        $('#messages').append($('<li>').text(msg));
+        $('#messages').append($('<li>').html('<b>' + msg.sender + ':</b> ' + msg.message));
     }
 
     var socket = io();
@@ -70,7 +70,7 @@
     $('form').submit(function () {
         var msg = $('#m').val();
         socket.emit('chat message', msg);
-        receiveMessage(msg);
+        receiveMessage({ message: msg, sender: 'ME' });
         $('#m').val('');
         return false;
     });
