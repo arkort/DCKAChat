@@ -62,7 +62,12 @@
 <script>
     function receiveMessage(msg)
     {
-        $('#messages').append($('<li>').html('<b>' + msg.sender + ':</b> ' + msg.message));
+        if (msg.isControl) {
+            $('#messages').append($('<li>').html('<i>' + msg.message + '</i>'));
+        }
+        else {
+            $('#messages').append($('<li>').html('<b>' + msg.sender + ':</b> ' + msg.message));
+        }
     }
 
     var socket = io();
@@ -70,7 +75,6 @@
     $('form').submit(function () {
         var msg = $('#m').val();
         socket.emit('chat message', msg);
-        receiveMessage({ message: msg, sender: 'ME' });
         $('#m').val('');
         return false;
     });
